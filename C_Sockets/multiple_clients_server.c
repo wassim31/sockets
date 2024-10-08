@@ -32,19 +32,14 @@
         listen(server_socket,5);
         int client_socket_channel;
         while (1) {
-            char c = (char) getchar();
-            if (c == 'q') {
-                return 0;
-            }
             if ((client_socket_channel = accept(server_socket,NULL,NULL)) == -1) {
                 fprintf(stderr, "error can't connect client");
                 return -1;
             } else {
                 printf("client %d connected \n", ++client_counter);
             }
-            char sent_data[20] = "hello client \n";
+            char sent_data[] = "HTTP/1.0 200 OK\r\n";
             send(client_socket_channel, sent_data, sizeof(sent_data), 0);
-
         }
 
 
